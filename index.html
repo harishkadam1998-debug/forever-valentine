@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title> To My Forever Valentine 💙</title>
+<title>Forever Valentine 💙</title>
 
 <style>
 body{
@@ -21,7 +21,7 @@ body{
   background:#fff;
   padding:32px;
   border-radius:25px;
-  width:340px;
+  width:350px;
   box-shadow:0 15px 40px rgba(0,0,0,.15);
   animation:fadeIn .6s ease;
 }
@@ -50,7 +50,14 @@ button{
   to{opacity:1;transform:scale(1)}
 }
 
-/* Emoji burst */
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+
 .emoji{
   position:absolute;
   font-size:22px;
@@ -62,20 +69,10 @@ button{
   to{transform:translateY(-700px);opacity:0}
 }
 
-/* NO button shake */
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  50%{transform:translateX(5px)}
-  75%{transform:translateX(-5px)}
-  100%{transform:translateX(0)}
-}
-
 .tease{
   position:absolute;
   font-size:14px;
   color:#2563eb;
-  animation:fadeIn .3s ease;
 }
 
 img{
@@ -109,45 +106,47 @@ img{
   <button class="primary" onclick="next()">Continue 💙</button>
 </div>
 
+<!-- INTRO -->
+<div class="card hidden q">
+  <p>
+    I already know you in so many ways…<br>
+    but these little questions are just my way of knowing you better,<br>
+    for us, for our future, for the days we haven’t lived yet 💙
+  </p>
+  <button class="primary" onclick="next()">Let’s do this 😌</button>
+</div>
+
 <!-- QUESTIONS -->
 <div class="card hidden q">
-  <p><b>When I’m angry, what actually helps me the most?</b></p>
-  <button class="secondary" onclick="react('🫶 Calm talks fix everything')">🫶 Talk it out calmly</button>
-  <button class="secondary" onclick="react('😌 Space then love works')">😤 Space then come back</button>
-  <button class="secondary" onclick="react('🍫 Food therapy confirmed')">🍫 Food & presence</button>
-  <button class="secondary" onclick="react('🤍 Comfort over fixing')">🤍 Just hold me</button>
+  <p><b>When I’m angry, what helps me most?</b></p>
+  <button class="secondary" onclick="react()">🫶 Talk it out calmly</button>
+  <button class="secondary" onclick="react()">😤 Space then come back</button>
+  <button class="secondary" onclick="react()">🍫 Food & presence</button>
+  <button class="secondary" onclick="react()">🤍 Just hold me</button>
 </div>
 
 <div class="card hidden q">
-  <p><b>When I’m low or overwhelmed, what comfort works best?</b></p>
-  <button class="secondary" onclick="react('🔋 Human charger mode ON')">🫂 Silent hugs</button>
-  <button class="secondary" onclick="react('💬 Words heal here')">🗣 Talk it out</button>
-  <button class="secondary" onclick="react('😂 Emergency comedian unlocked')">😂 Make me laugh</button>
-  <button class="secondary" onclick="react('👀 I’ll read the room')">🤍 Depends on the day</button>
+  <p><b>When I’m low, what comfort works best?</b></p>
+  <button class="secondary" onclick="react()">🫂 Silent hugs</button>
+  <button class="secondary" onclick="react()">🗣 Talking it out</button>
+  <button class="secondary" onclick="react()">😂 Make me laugh</button>
+  <button class="secondary" onclick="react()">🤍 Depends on the day</button>
 </div>
 
 <div class="card hidden q">
-  <p><b>When I’m in a really bad mood… what should you do?</b></p>
-  <button class="secondary" onclick="react('🎧 Listening mode ON')">🗣 Listen patiently</button>
-  <button class="secondary" onclick="react('😄 Distraction accepted')">😂 Distract me</button>
-  <button class="secondary" onclick="react('🤍 Quiet support matters')">😌 Stay close</button>
-  <button class="secondary" onclick="react('🧠 Adaptability unlocked')">🤍 Depends</button>
+  <p><b>When I’m in a bad mood, what should you do?</b></p>
+  <button class="secondary" onclick="react()">🎧 Listen patiently</button>
+  <button class="secondary" onclick="react()">😂 Distract me</button>
+  <button class="secondary" onclick="react()">😌 Stay close</button>
+  <button class="secondary" onclick="react()">🤍 Adapt to the day</button>
 </div>
 
 <div class="card hidden q">
-  <p><b>When we’re bored together, what do you enjoy most?</b></p>
-  <button class="secondary" onclick="react('🧘 Parallel peace')">📱 Own things together</button>
-  <button class="secondary" onclick="react('💬 Chaos conversations')">💬 Random talks</button>
-  <button class="secondary" onclick="react('😴 Comfort level elite')">😴 Quiet existence</button>
-  <button class="secondary" onclick="react('😏 Permission noted')">😂 Annoying each other</button>
-</div>
-
-<div class="card hidden q">
-  <p><b>When I’m stressed, what you do helps the most?</b></p>
-  <button class="secondary" onclick="react('☕ Presence matters')">☕ Sit quietly</button>
-  <button class="secondary" onclick="react('💙 Words of strength')">💬 Motivate me</button>
-  <button class="secondary" onclick="react('😂 Stress distraction accepted')">😂 Make me laugh</button>
-  <button class="secondary" onclick="react('🤍 Just you is enough')">🤍 Be there</button>
+  <p><b>When I’m stressed, what helps the most?</b></p>
+  <button class="secondary" onclick="react()">☕ Sit quietly</button>
+  <button class="secondary" onclick="react()">💬 Motivate me</button>
+  <button class="secondary" onclick="react()">😂 Make me laugh</button>
+  <button class="secondary" onclick="react()">🤍 Just be there</button>
 </div>
 
 <div class="card hidden q">
@@ -157,7 +156,7 @@ img{
   <button class="secondary" onclick="next()">🫶 Talk it out</button>
 </div>
 
-<!-- AWW PAGE -->
+<!-- AWW -->
 <div class="card hidden" id="aww">
   <p>
     There’s no right or wrong answers here…<br>
@@ -171,49 +170,52 @@ img{
 <div class="card hidden" id="final">
   <h1>I’m choosing you 💙</h1>
   <p>Every version. Every day.</p>
-  <img src="final-memory.jpg" alt="2018 to 2026">
+  <img src="final-memory.jpg">
 </div>
 
 <script>
-let index=1;
+let step=1, noCount=0;
+const cards=document.querySelectorAll('.card');
 const questions=document.querySelectorAll('.q');
-
-/* YES explosion */
-document.getElementById('yesBtn').onclick=()=>{
-  burst();
-  show(2);
-};
-
-/* NO button evil */
-let speed=1;
+const yesBtn=document.getElementById('yesBtn');
 const noBtn=document.getElementById('noBtn');
+const teaseLines=[
+  "Nice try 😏",
+  "I admire the confidence 😌",
+  "We both know this isn’t happening 😂"
+];
+
+function show(n){
+  cards.forEach(c=>c.classList.add('hidden'));
+  if(n===1) page1.classList.remove('hidden');
+  else if(n===2) page2.classList.remove('hidden');
+  else if(n<=questions.length+2) questions[n-3].classList.remove('hidden');
+  else if(n===questions.length+3) aww.classList.remove('hidden');
+}
+
+function next(){ step++; show(step); }
+
+yesBtn.onclick=()=>{ burst(); show(2); };
+
 noBtn.onmouseover=()=>{
   noBtn.style.animation='shake .3s';
-  setTimeout(()=>{
-    tease();
-    noBtn.style.left=Math.random()*(window.innerWidth-120)+'px';
-    noBtn.style.top=Math.random()*(window.innerHeight-60)+'px';
-    speed+=.4;
-  },300);
+  noCount++;
+  yesBtn.style.transform=`scale(${1+noCount*0.2})`;
+
+  const t=document.createElement('div');
+  t.className='tease';
+  t.innerText=teaseLines[(noCount-1)%teaseLines.length];
+  t.style.left=noBtn.offsetLeft+'px';
+  t.style.top=noBtn.offsetTop-20+'px';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),900);
+
+  noBtn.style.position='absolute';
+  noBtn.style.left=Math.random()*(window.innerWidth-120)+'px';
+  noBtn.style.top=Math.random()*(window.innerHeight-60)+'px';
 };
 
-/* Helpers */
-function show(n){
-  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
-  if(n<=2) document.getElementById('page'+n).classList.remove('hidden');
-  else if(n<=8) questions[n-3].classList.remove('hidden');
-  else if(n==9) document.getElementById('aww').classList.remove('hidden');
-}
-
-function next(){
-  index++;
-  show(index+1);
-}
-
-function react(text){
-  burst();
-  setTimeout(()=>next(),600);
-}
+function react(){ burst(); setTimeout(next,600); }
 
 function burst(){
   for(let i=0;i<25;i++){
@@ -227,19 +229,9 @@ function burst(){
   }
 }
 
-function tease(){
-  const t=document.createElement('div');
-  t.className='tease';
-  t.innerText='Nice try 😏';
-  t.style.left=noBtn.offsetLeft+'px';
-  t.style.top=noBtn.offsetTop-20+'px';
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),800);
-}
-
 function final(){
-  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
-  document.getElementById('final').classList.remove('hidden');
+  cards.forEach(c=>c.classList.add('hidden'));
+  final.classList.remove('hidden');
 }
 </script>
 
