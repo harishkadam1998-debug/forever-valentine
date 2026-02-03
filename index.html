@@ -19,7 +19,7 @@ body{
 
 .card{
   background:#fff;
-  padding:35px;
+  padding:32px;
   border-radius:25px;
   width:340px;
   box-shadow:0 15px 40px rgba(0,0,0,.15);
@@ -29,15 +29,16 @@ body{
 .hidden{display:none;}
 
 h1{color:#2563eb;}
-p{color:#333;}
+p{color:#333;font-size:15px;}
 
 button{
   padding:12px 22px;
   border:none;
   border-radius:30px;
   cursor:pointer;
-  margin:10px;
-  font-size:15px;
+  margin:8px 0;
+  font-size:14px;
+  width:100%;
   transition:.3s;
 }
 
@@ -49,18 +50,33 @@ button{
   to{opacity:1;transform:scale(1)}
 }
 
+/* Emoji burst */
 .emoji{
   position:absolute;
   font-size:22px;
-  animation:floatUp 5s linear forwards;
+  animation:floatUp 4s linear forwards;
 }
 
 @keyframes floatUp{
   from{transform:translateY(0);opacity:1}
-  to{transform:translateY(-800px);opacity:0}
+  to{transform:translateY(-700px);opacity:0}
 }
 
-.option{display:block;width:100%;margin:8px 0}
+/* NO button shake */
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  50%{transform:translateX(5px)}
+  75%{transform:translateX(-5px)}
+  100%{transform:translateX(0)}
+}
+
+.tease{
+  position:absolute;
+  font-size:14px;
+  color:#2563eb;
+  animation:fadeIn .3s ease;
+}
 
 img{
   width:100%;
@@ -90,56 +106,68 @@ img{
     Happy Valentine’s Day Babeuuu,<br>
     my forvever constant, home, peace, etc,.....💫
   </p>
-  <button class="primary" onclick="nextPage(3)">Continue 💙</button>
+  <button class="primary" onclick="next()">Continue 💙</button>
 </div>
 
-<!-- PAGE 3 QUESTIONS -->
-<div class="card hidden" id="page3">
-  <h1>Quick love checkpoint 😌💙</h1>
-  <p>When we argue, what actually fixes it?</p>
-  <button class="option secondary" onclick="answer()">🥹 Calm explanation</button>
-  <button class="option secondary" onclick="answer()">🍟 Food solves everything</button>
-  <button class="option secondary" onclick="answer()">😤 Drama then peace</button>
+<!-- QUESTIONS -->
+<div class="card hidden q">
+  <p><b>When I’m angry, what actually helps me the most?</b></p>
+  <button class="secondary" onclick="react('🫶 Calm talks fix everything')">🫶 Talk it out calmly</button>
+  <button class="secondary" onclick="react('😌 Space then love works')">😤 Space then come back</button>
+  <button class="secondary" onclick="react('🍫 Food therapy confirmed')">🍫 Food & presence</button>
+  <button class="secondary" onclick="react('🤍 Comfort over fixing')">🤍 Just hold me</button>
 </div>
 
-<div class="card hidden" id="page4">
-  <p>If we’re tired after a long day, we choose…</p>
-  <button class="option secondary" onclick="answer()">🌙 Late-night call</button>
-  <button class="option secondary" onclick="answer()">📱 Sending reels</button>
-  <button class="option secondary" onclick="answer()">💤 Comfortable silence</button>
+<div class="card hidden q">
+  <p><b>When I’m low or overwhelmed, what comfort works best?</b></p>
+  <button class="secondary" onclick="react('🔋 Human charger mode ON')">🫂 Silent hugs</button>
+  <button class="secondary" onclick="react('💬 Words heal here')">🗣 Talk it out</button>
+  <button class="secondary" onclick="react('😂 Emergency comedian unlocked')">😂 Make me laugh</button>
+  <button class="secondary" onclick="react('👀 I’ll read the room')">🤍 Depends on the day</button>
 </div>
 
-<div class="card hidden" id="page5">
-  <p>At a badminton match, we’re most likely to…</p>
-  <button class="option secondary" onclick="answer()">🏸 Competitive chaos</button>
-  <button class="option secondary" onclick="answer()">😂 Laugh more than play</button>
-  <button class="option secondary" onclick="answer()">😎 Act cool, enjoy secretly</button>
+<div class="card hidden q">
+  <p><b>When I’m in a really bad mood… what should you do?</b></p>
+  <button class="secondary" onclick="react('🎧 Listening mode ON')">🗣 Listen patiently</button>
+  <button class="secondary" onclick="react('😄 Distraction accepted')">😂 Distract me</button>
+  <button class="secondary" onclick="react('🤍 Quiet support matters')">😌 Stay close</button>
+  <button class="secondary" onclick="react('🧠 Adaptability unlocked')">🤍 Depends</button>
 </div>
 
-<div class="card hidden" id="page6">
-  <p>In food fights, the unspoken rule is…</p>
-  <button class="option secondary" onclick="answer()">🍽 Sharing with drama</button>
-  <button class="option secondary" onclick="answer()">😏 Stealing = love</button>
-  <button class="option secondary" onclick="answer()">🚫 Touch & die</button>
+<div class="card hidden q">
+  <p><b>When we’re bored together, what do you enjoy most?</b></p>
+  <button class="secondary" onclick="react('🧘 Parallel peace')">📱 Own things together</button>
+  <button class="secondary" onclick="react('💬 Chaos conversations')">💬 Random talks</button>
+  <button class="secondary" onclick="react('😴 Comfort level elite')">😴 Quiet existence</button>
+  <button class="secondary" onclick="react('😏 Permission noted')">😂 Annoying each other</button>
 </div>
 
-<div class="card hidden" id="page7">
-  <p>For the future… one rule we never break?</p>
-  <button class="option secondary" onclick="nextPage(8)">💙 Always us</button>
-  <button class="option secondary" onclick="nextPage(8)">🕰 Always show up</button>
-  <button class="option secondary" onclick="nextPage(8)">🫶 Talk it out</button>
+<div class="card hidden q">
+  <p><b>When I’m stressed, what you do helps the most?</b></p>
+  <button class="secondary" onclick="react('☕ Presence matters')">☕ Sit quietly</button>
+  <button class="secondary" onclick="react('💙 Words of strength')">💬 Motivate me</button>
+  <button class="secondary" onclick="react('😂 Stress distraction accepted')">😂 Make me laugh</button>
+  <button class="secondary" onclick="react('🤍 Just you is enough')">🤍 Be there</button>
 </div>
 
-<!-- FINAL PAGE -->
-<div class="card hidden" id="page8">
-  <h1>There’s no right or wrong answers 💙</h1>
+<div class="card hidden q">
+  <p><b>No matter what phase… one rule we never break?</b></p>
+  <button class="secondary" onclick="next()">💙 Choose each other</button>
+  <button class="secondary" onclick="next()">🕰 Show up always</button>
+  <button class="secondary" onclick="next()">🫶 Talk it out</button>
+</div>
+
+<!-- AWW PAGE -->
+<div class="card hidden" id="aww">
   <p>
-    Just little pieces of how you love,<br>
+    There’s no right or wrong answers here…<br>
+    just little pieces of how you love,<br>
     and how I want to love you better.
   </p>
-  <button class="primary" onclick="reveal()">Now come here, Valentine 🤍</button>
+  <button class="primary" onclick="final()">Now come here, Valentine 🤍</button>
 </div>
 
+<!-- FINAL -->
 <div class="card hidden" id="final">
   <h1>I’m choosing you 💙</h1>
   <p>Every version. Every day.</p>
@@ -147,43 +175,71 @@ img{
 </div>
 
 <script>
-let current=1;
+let index=1;
+const questions=document.querySelectorAll('.q');
 
-function nextPage(n){
-  document.getElementById("page"+current).classList.add("hidden");
-  document.getElementById("page"+n).classList.remove("hidden");
-  current=n;
-}
-
-function answer(){
-  nextPage(current+1);
-}
-
-document.getElementById("noBtn").addEventListener("mouseover",()=>{
-  noBtn.style.left=Math.random()*300+"px";
-  noBtn.style.top=Math.random()*300+"px";
-});
-
-document.getElementById("yesBtn").onclick=()=>{
-  explode();
-  nextPage(2);
+/* YES explosion */
+document.getElementById('yesBtn').onclick=()=>{
+  burst();
+  show(2);
 };
 
-function explode(){
-  for(let i=0;i<40;i++){
-    const e=document.createElement("div");
-    e.className="emoji";
-    e.innerHTML=["💙","💖","😘","💋","💞"][Math.floor(Math.random()*5)];
-    e.style.left=Math.random()*window.innerWidth+"px";
-    e.style.bottom="0px";
+/* NO button evil */
+let speed=1;
+const noBtn=document.getElementById('noBtn');
+noBtn.onmouseover=()=>{
+  noBtn.style.animation='shake .3s';
+  setTimeout(()=>{
+    tease();
+    noBtn.style.left=Math.random()*(window.innerWidth-120)+'px';
+    noBtn.style.top=Math.random()*(window.innerHeight-60)+'px';
+    speed+=.4;
+  },300);
+};
+
+/* Helpers */
+function show(n){
+  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
+  if(n<=2) document.getElementById('page'+n).classList.remove('hidden');
+  else if(n<=8) questions[n-3].classList.remove('hidden');
+  else if(n==9) document.getElementById('aww').classList.remove('hidden');
+}
+
+function next(){
+  index++;
+  show(index+1);
+}
+
+function react(text){
+  burst();
+  setTimeout(()=>next(),600);
+}
+
+function burst(){
+  for(let i=0;i<25;i++){
+    const e=document.createElement('div');
+    e.className='emoji';
+    e.innerHTML=['💙','💖','😘','💋','💞'][Math.floor(Math.random()*5)];
+    e.style.left=Math.random()*window.innerWidth+'px';
+    e.style.bottom='0';
     document.body.appendChild(e);
-    setTimeout(()=>e.remove(),5000);
+    setTimeout(()=>e.remove(),4000);
   }
 }
 
-function reveal(){
-  document.getElementById("page8").classList.add("hidden");
-  document.getElementById("final").classList.remove("hidden");
+function tease(){
+  const t=document.createElement('div');
+  t.className='tease';
+  t.innerText='Nice try 😏';
+  t.style.left=noBtn.offsetLeft+'px';
+  t.style.top=noBtn.offsetTop-20+'px';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),800);
+}
+
+function final(){
+  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
+  document.getElementById('final').classList.remove('hidden');
 }
 </script>
 
