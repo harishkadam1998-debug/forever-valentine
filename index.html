@@ -1,99 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Forever Valentine 💙</title>
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #e0f0ff, #ffffff);
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>Forever Valentine 💙</title>
 
-    .box {
-      background: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      width: 320px;
-    }
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#e0f2ff,#ffffff);
+  font-family:'Segoe UI',sans-serif;
+  overflow:hidden;
+  text-align:center;
+}
 
-    h1 {
-      color: #1e88e5;
-    }
+.card{
+  background:#fff;
+  padding:35px;
+  border-radius:25px;
+  width:340px;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+  animation:fadeIn .6s ease;
+}
 
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-      transition: 0.3s;
-    }
+.hidden{display:none;}
 
-    #yes {
-      background-color: #1e88e5;
-      color: white;
-    }
+h1{color:#2563eb;}
+p{color:#333;}
 
-    #no {
-      background-color: #ccc;
-      position: absolute;
-    }
+button{
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  margin:10px;
+  font-size:15px;
+  transition:.3s;
+}
 
-    .message {
-      display: none;
-      margin-top: 20px;
-      color: #333;
-    }
-  </style>
+.primary{background:#2563eb;color:white;}
+.secondary{background:#e5e7eb;}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.95)}
+  to{opacity:1;transform:scale(1)}
+}
+
+.emoji{
+  position:absolute;
+  font-size:22px;
+  animation:floatUp 5s linear forwards;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-800px);opacity:0}
+}
+
+.option{display:block;width:100%;margin:8px 0}
+
+img{
+  width:100%;
+  border-radius:15px;
+  margin-top:15px;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="box" id="questionBox">
-    <h1>Will you be my forever Valentine? 💙</h1>
-    <button id="yes">YES 💙</button>
-    <button id="no">NO 🙃</button>
-  </div>
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+  <h1>Will you be my forever Valentine? 💙</h1>
+  <button class="primary" id="yesBtn">YES 💙</button>
+  <button class="secondary" id="noBtn">NO 🙃</button>
+</div>
 
-  <div class="card hidden" id="answer">
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
   <h1>YAYYYY I knew neen yes a select madodhu antha🥹💙</h1>
-
   <p>
-    Babeuu you didn’t just say yes to a question. <br>
-    You said yes to laughs, fights, growth, <br>
+    Babeuu you didn’t just say yes to a question.<br>
+    You said yes to laughs, fights, growth,<br>
     love, and forever us baby ma kissessssssssssss...... 😘💙
     <br><br>
     Happy Valentine’s Day Babeuuu,<br>
     my forvever constant, home, peace, etc,.....💫
   </p>
+  <button class="primary" onclick="nextPage(3)">Continue 💙</button>
+</div>
 
-  <button id="continue">Continue 💙</button>
+<!-- PAGE 3 QUESTIONS -->
+<div class="card hidden" id="page3">
+  <h1>Quick love checkpoint 😌💙</h1>
+  <p>When we argue, what actually fixes it?</p>
+  <button class="option secondary" onclick="answer()">🥹 Calm explanation</button>
+  <button class="option secondary" onclick="answer()">🍟 Food solves everything</button>
+  <button class="option secondary" onclick="answer()">😤 Drama then peace</button>
+</div>
+
+<div class="card hidden" id="page4">
+  <p>If we’re tired after a long day, we choose…</p>
+  <button class="option secondary" onclick="answer()">🌙 Late-night call</button>
+  <button class="option secondary" onclick="answer()">📱 Sending reels</button>
+  <button class="option secondary" onclick="answer()">💤 Comfortable silence</button>
+</div>
+
+<div class="card hidden" id="page5">
+  <p>At a badminton match, we’re most likely to…</p>
+  <button class="option secondary" onclick="answer()">🏸 Competitive chaos</button>
+  <button class="option secondary" onclick="answer()">😂 Laugh more than play</button>
+  <button class="option secondary" onclick="answer()">😎 Act cool, enjoy secretly</button>
+</div>
+
+<div class="card hidden" id="page6">
+  <p>In food fights, the unspoken rule is…</p>
+  <button class="option secondary" onclick="answer()">🍽 Sharing with drama</button>
+  <button class="option secondary" onclick="answer()">😏 Stealing = love</button>
+  <button class="option secondary" onclick="answer()">🚫 Touch & die</button>
+</div>
+
+<div class="card hidden" id="page7">
+  <p>For the future… one rule we never break?</p>
+  <button class="option secondary" onclick="nextPage(8)">💙 Always us</button>
+  <button class="option secondary" onclick="nextPage(8)">🕰 Always show up</button>
+  <button class="option secondary" onclick="nextPage(8)">🫶 Talk it out</button>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="card hidden" id="page8">
+  <h1>There’s no right or wrong answers 💙</h1>
+  <p>
+    Just little pieces of how you love,<br>
+    and how I want to love you better.
+  </p>
+  <button class="primary" onclick="reveal()">Now come here, Valentine 🤍</button>
+</div>
+
+<div class="card hidden" id="final">
+  <h1>I’m choosing you 💙</h1>
+  <p>Every version. Every day.</p>
+  <img src="final-memory.jpg" alt="2018 to 2026">
 </div>
 
 <script>
-  const noBtn = document.getElementById("no");
-  const yesBtn = document.getElementById("yes");
-  const questionBox = document.getElementById("questionBox");
-  const yesMessage = document.getElementById("yesMessage");
+let current=1;
 
-  noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-  });
+function nextPage(n){
+  document.getElementById("page"+current).classList.add("hidden");
+  document.getElementById("page"+n).classList.remove("hidden");
+  current=n;
+}
 
-  yesBtn.addEventListener("click", () => {
-    questionBox.style.display = "none";
-    yesMessage.style.display = "block";
-  });
+function answer(){
+  nextPage(current+1);
+}
+
+document.getElementById("noBtn").addEventListener("mouseover",()=>{
+  noBtn.style.left=Math.random()*300+"px";
+  noBtn.style.top=Math.random()*300+"px";
+});
+
+document.getElementById("yesBtn").onclick=()=>{
+  explode();
+  nextPage(2);
+};
+
+function explode(){
+  for(let i=0;i<40;i++){
+    const e=document.createElement("div");
+    e.className="emoji";
+    e.innerHTML=["💙","💖","😘","💋","💞"][Math.floor(Math.random()*5)];
+    e.style.left=Math.random()*window.innerWidth+"px";
+    e.style.bottom="0px";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),5000);
+  }
+}
+
+function reveal(){
+  document.getElementById("page8").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+}
 </script>
 
 </body>
