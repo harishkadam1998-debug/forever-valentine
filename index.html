@@ -29,7 +29,7 @@ body{
 .hidden{display:none;}
 
 h1{color:#2563eb;}
-p{color:#333;font-size:15px;line-height:1.4;}
+p{color:#333;font-size:15px;}
 
 button{
   padding:12px 22px;
@@ -50,18 +50,6 @@ button{
   to{opacity:1;transform:scale(1)}
 }
 
-/* Emoji burst */
-.emoji{
-  position:absolute;
-  font-size:22px;
-  animation:floatUp 4s linear forwards;
-}
-@keyframes floatUp{
-  from{transform:translateY(0);opacity:1}
-  to{transform:translateY(-700px);opacity:0}
-}
-
-/* NO button shake */
 @keyframes shake{
   0%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
@@ -70,11 +58,21 @@ button{
   100%{transform:translateX(0)}
 }
 
+.emoji{
+  position:absolute;
+  font-size:22px;
+  animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-700px);opacity:0}
+}
+
 .tease{
   position:absolute;
   font-size:14px;
   color:#2563eb;
-  animation:fadeIn .3s ease;
 }
 
 img{
@@ -108,23 +106,19 @@ img{
   <button class="primary" onclick="next()">Continue 💙</button>
 </div>
 
-<!-- INTRO BEFORE QUESTIONS -->
+<!-- INTRO -->
 <div class="card hidden q">
   <p>
-    Before we go ahead… one small thing 🤍<br><br>
-    I already know you. I love you for who you are today.<br>
-    These questions are not a test…<br>
-    they’re little notes for me —<br>
-    so I can understand you better,<br>
-    love you better,<br>
-    and show up better… in our future 💙
+    I already know you in so many ways…<br>
+    but these little questions are just my way of knowing you better,<br>
+    for us, for our future, for the days we haven’t lived yet 💙
   </p>
-  <button class="primary" onclick="next()">Okay 🥹💙</button>
+  <button class="primary" onclick="next()">Let’s do this 😌</button>
 </div>
 
 <!-- QUESTIONS -->
 <div class="card hidden q">
-  <p><b>When I’m angry, what actually helps me the most?</b></p>
+  <p><b>When I’m angry, what helps me most?</b></p>
   <button class="secondary" onclick="react()">🫶 Talk it out calmly</button>
   <button class="secondary" onclick="react()">😤 Space then come back</button>
   <button class="secondary" onclick="react()">🍫 Food & presence</button>
@@ -132,31 +126,23 @@ img{
 </div>
 
 <div class="card hidden q">
-  <p><b>When I’m low or overwhelmed, what comfort works best?</b></p>
+  <p><b>When I’m low, what comfort works best?</b></p>
   <button class="secondary" onclick="react()">🫂 Silent hugs</button>
-  <button class="secondary" onclick="react()">🗣 Talk it out</button>
+  <button class="secondary" onclick="react()">🗣 Talking it out</button>
   <button class="secondary" onclick="react()">😂 Make me laugh</button>
   <button class="secondary" onclick="react()">🤍 Depends on the day</button>
 </div>
 
 <div class="card hidden q">
-  <p><b>When I’m in a really bad mood… what should you do?</b></p>
-  <button class="secondary" onclick="react()">🗣 Listen patiently</button>
+  <p><b>When I’m in a bad mood, what should you do?</b></p>
+  <button class="secondary" onclick="react()">🎧 Listen patiently</button>
   <button class="secondary" onclick="react()">😂 Distract me</button>
   <button class="secondary" onclick="react()">😌 Stay close</button>
-  <button class="secondary" onclick="react()">🤍 Depends</button>
+  <button class="secondary" onclick="react()">🤍 Adapt to the day</button>
 </div>
 
 <div class="card hidden q">
-  <p><b>When we’re bored together, what do you enjoy most?</b></p>
-  <button class="secondary" onclick="react()">📱 Own things together</button>
-  <button class="secondary" onclick="react()">💬 Random talks</button>
-  <button class="secondary" onclick="react()">😴 Quiet existence</button>
-  <button class="secondary" onclick="react()">😂 Annoying each other</button>
-</div>
-
-<div class="card hidden q">
-  <p><b>When I’m stressed, what you do helps the most?</b></p>
+  <p><b>When I’m stressed, what helps the most?</b></p>
   <button class="secondary" onclick="react()">☕ Sit quietly</button>
   <button class="secondary" onclick="react()">💬 Motivate me</button>
   <button class="secondary" onclick="react()">😂 Make me laugh</button>
@@ -164,18 +150,18 @@ img{
 </div>
 
 <div class="card hidden q">
-  <p><b>No matter what phase we’re in… one thing we always do?</b></p>
+  <p><b>No matter what phase… one rule we never break?</b></p>
   <button class="secondary" onclick="next()">💙 Choose each other</button>
   <button class="secondary" onclick="next()">🕰 Show up always</button>
   <button class="secondary" onclick="next()">🫶 Talk it out</button>
 </div>
 
-<!-- AWW PAGE -->
+<!-- AWW -->
 <div class="card hidden" id="aww">
   <p>
     There’s no right or wrong answers here…<br>
     just little pieces of how you love,<br>
-    and how I want to love you better 🤍
+    and how I want to love you better.
   </p>
   <button class="primary" onclick="final()">Now come here, Valentine 🤍</button>
 </div>
@@ -184,80 +170,68 @@ img{
 <div class="card hidden" id="final">
   <h1>I’m choosing you 💙</h1>
   <p>Every version. Every day.</p>
-  <img src="final-memory.jpg" alt="2018 to 2026">
+  <img src="final-memory.jpg">
 </div>
 
 <script>
-let step=1;
-let yesScale=1;
-let noCount=0;
+let step=1, noCount=0;
 const cards=document.querySelectorAll('.card');
 const questions=document.querySelectorAll('.q');
-const noLines=["Nice try 😏","Hmm not happening 😌","You know the answer already 💙","Still choosing YES 😘"];
+const yesBtn=document.getElementById('yesBtn');
+const noBtn=document.getElementById('noBtn');
+const teaseLines=[
+  "Nice try 😏",
+  "I admire the confidence 😌",
+  "We both know this isn’t happening 😂"
+];
 
-function showNext(){
+function show(n){
   cards.forEach(c=>c.classList.add('hidden'));
-  if(step===1) document.getElementById("page2").classList.remove('hidden');
-  else if(step<=questions.length+1) questions[step-2].classList.remove('hidden');
-  else document.getElementById("aww").classList.remove('hidden');
+  if(n===1) page1.classList.remove('hidden');
+  else if(n===2) page2.classList.remove('hidden');
+  else if(n<=questions.length+2) questions[n-3].classList.remove('hidden');
+  else if(n===questions.length+3) aww.classList.remove('hidden');
 }
 
-function next(){
-  step++;
-  burst();
-  showNext();
-}
+function next(){ step++; show(step); }
 
-function react(){
-  burst();
-  setTimeout(()=>next(),500);
-}
+yesBtn.onclick=()=>{ burst(); show(2); };
 
-function final(){
-  cards.forEach(c=>c.classList.add('hidden'));
-  document.getElementById("final").classList.remove('hidden');
-}
-
-document.getElementById("yesBtn").onclick=()=>{
-  burst();
-  showNext();
-};
-
-const noBtn=document.getElementById("noBtn");
 noBtn.onmouseover=()=>{
   noBtn.style.animation='shake .3s';
-  tease();
-  growYes();
+  noCount++;
+  yesBtn.style.transform=`scale(${1+noCount*0.2})`;
+
+  const t=document.createElement('div');
+  t.className='tease';
+  t.innerText=teaseLines[(noCount-1)%teaseLines.length];
+  t.style.left=noBtn.offsetLeft+'px';
+  t.style.top=noBtn.offsetTop-20+'px';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),900);
+
+  noBtn.style.position='absolute';
   noBtn.style.left=Math.random()*(window.innerWidth-120)+'px';
   noBtn.style.top=Math.random()*(window.innerHeight-60)+'px';
 };
 
-function growYes(){
-  yesScale+=0.2;
-  document.getElementById("yesBtn").style.transform=`scale(${yesScale})`;
-}
-
-function tease(){
-  const t=document.createElement("div");
-  t.className="tease";
-  t.innerText=noLines[noCount%noLines.length];
-  noCount++;
-  t.style.left=noBtn.offsetLeft+"px";
-  t.style.top=noBtn.offsetTop-20+"px";
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),800);
-}
+function react(){ burst(); setTimeout(next,600); }
 
 function burst(){
-  for(let i=0;i<20;i++){
-    const e=document.createElement("div");
-    e.className="emoji";
-    e.innerHTML=["💙","💖","😘","💋","💞"][Math.floor(Math.random()*5)];
-    e.style.left=Math.random()*window.innerWidth+"px";
-    e.style.bottom="0";
+  for(let i=0;i<25;i++){
+    const e=document.createElement('div');
+    e.className='emoji';
+    e.innerHTML=['💙','💖','😘','💋','💞'][Math.floor(Math.random()*5)];
+    e.style.left=Math.random()*window.innerWidth+'px';
+    e.style.bottom='0';
     document.body.appendChild(e);
     setTimeout(()=>e.remove(),4000);
   }
+}
+
+function final(){
+  cards.forEach(c=>c.classList.add('hidden'));
+  final.classList.remove('hidden');
 }
 </script>
 
