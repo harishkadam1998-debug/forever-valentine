@@ -7,125 +7,185 @@
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+  margin:0;height:100vh;
+  display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,#e0f2ff,#ffffff);
-  font-family:'Segoe UI',sans-serif;overflow:hidden;text-align:center;
+  font-family:'Segoe UI',sans-serif;
+  overflow:hidden;text-align:center;
 }
 .card{
-  width:360px;background:#fff;padding:32px;border-radius:26px;
-  box-shadow:0 16px 44px rgba(0,0,0,.15);animation:fade .5s ease;
+  width:360px;
+  background:#fff;
+  padding:30px;
+  border-radius:26px;
+  box-shadow:0 16px 44px rgba(0,0,0,.15);
+  animation:fade .45s ease;
 }
 .hidden{display:none}
 h1{color:#2563eb;margin-top:0}
 p{color:#333;font-size:15px;line-height:1.5}
+
 button{
-  width:100%;padding:12px 22px;border:none;border-radius:30px;
-  cursor:pointer;margin:8px 0;font-size:14px;transition:.25s;
+  width:100%;
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  margin:8px 0;
+  font-size:14px;
+  transition:.25s;
 }
+button:active{transform:scale(.95)}
 .primary{background:#2563eb;color:#fff}
 .secondary{background:#e5e7eb}
 
-@keyframes fade{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes fade{
+  from{opacity:0;transform:scale(.95)}
+  to{opacity:1;transform:scale(1)}
+}
 @keyframes shake{
-  0%{transform:translateX(0)}25%{transform:translateX(-6px)}
-  50%{transform:translateX(6px)}75%{transform:translateX(-6px)}
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
   100%{transform:translateX(0)}
 }
+
 .emoji{
-  position:absolute;font-size:22px;animation:float 4s linear forwards;pointer-events:none
+  position:absolute;
+  font-size:22px;
+  animation:float 4s linear forwards;
+  pointer-events:none;
 }
-@keyframes float{from{transform:translateY(0);opacity:1}to{transform:translateY(-720px);opacity:0}}
-.tease{position:absolute;color:#2563eb;font-size:14px;pointer-events:none}
-img{width:100%;border-radius:16px;margin-top:14px}
+@keyframes float{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-720px);opacity:0}
+}
+
+.reaction{
+  margin-top:10px;
+  color:#2563eb;
+  font-size:14px;
+  animation:fade .25s ease;
+}
+
+.tease{
+  position:absolute;
+  font-size:14px;
+  color:#2563eb;
+  pointer-events:none;
+}
+
+img{
+  width:100%;
+  border-radius:16px;
+  margin-top:14px;
+}
 </style>
 </head>
 
 <body>
 
 <!-- PAGE 1 -->
-<div class="card" id="p1">
+<div class="card" id="page0">
   <h1>Will you be my forever Valentine? 💙</h1>
-  <button class="primary" id="yes">YES 💙</button>
-  <button class="secondary" id="no">NO 🙃</button>
+  <button class="primary" id="yesBtn">YES 💙</button>
+  <button class="secondary" id="noBtn">NO 🙃</button>
 </div>
 
 <!-- PAGE 2 -->
-<div class="card hidden" id="p2">
+<div class="card hidden" id="page1">
   <h1>YAYYYY I knew neen yes a select madodhu antha🥹💙</h1>
   <p>
-    Babeuu you didn’t just say yes to a question.<br>
+    Baby you didn’t just say yes to a question.<br>
     You said yes to laughs, fights, growth,<br>
     love, and forever us baby ma kissessssssssssss...... 😘💙
     <br><br>
     Happy Valentine’s Day Babeuuu,<br>
     my forvever constant, home, peace, etc,.....💫
   </p>
-  <button class="primary" onclick="next()">Continue 💙</button>
+  <button class="primary" onclick="goNext()">Continue 💙</button>
 </div>
 
-<!-- INTRO (OPTION B) -->
-<div class="card hidden q">
-  <p><b>Warning ⚠️<br>The next few seconds may cause smiling, blushing, or missing me.</b></p>
-  <button class="primary" onclick="next()">Proceed 😌</button>
+<!-- INTRO -->
+<div class="card hidden" id="page2">
+  <p><b>Warning ⚠️<br>
+  The next few seconds may cause smiling, blushing, or missing me.</b></p>
+  <button class="primary" onclick="goNext()">Proceed 😌</button>
 </div>
 
 <!-- PICKUP ROUNDS -->
-<div class="card hidden q">
+<div class="card hidden pickup">
   <p><b>Are you tired?<br>Because you’ve been running in my mind all day 😌</b></p>
-  <button class="secondary" onclick="react('Ouch. First attempt sacrificed.')">🙄 That was bad</button>
-  <button class="secondary" onclick="react('I’ll take that win.')">😳 Okay… cute</button>
-  <button class="secondary" onclick="react('Good. Stay with me.')">💙 I like this already</button>
+  <button class="secondary" onclick="react(this,'Ouch. First attempt sacrificed.')">🙄 That was bad</button>
+  <button class="secondary" onclick="react(this,'I’ll take that win.')">😳 Okay… cute</button>
+  <button class="secondary" onclick="react(this,'Good. Stay with me.')">💙 I like this already</button>
+  <p class="reaction hidden"></p>
 </div>
 
-<div class="card hidden q">
+<div class="card hidden pickup">
   <p><b>I was going to write something poetic…<br>but you like me more than poetry 😏</b></p>
-  <button class="secondary" onclick="react('Honesty is attractive.')">😂 True</button>
-  <button class="secondary" onclick="react('I’ll prove it later.')">😌 Debatable</button>
-  <button class="secondary" onclick="react('I’ll accept that.')">😳 Smooth…</button>
+  <button class="secondary" onclick="react(this,'Honesty is attractive.')">😂 True</button>
+  <button class="secondary" onclick="react(this,'I’ll prove it later.')">😌 Debatable</button>
+  <button class="secondary" onclick="react(this,'I’ll accept that.')">😳 Smooth…</button>
+  <p class="reaction hidden"></p>
 </div>
 
-<div class="card hidden q">
+<div class="card hidden pickup">
   <p><b>If being cute was a job,<br>you’d be overqualified.</b></p>
-  <button class="secondary" onclick="react('Okay okay… maybe one more.')">🙄 Stop it</button>
-  <button class="secondary" onclick="react('Gladly.')">😌 Keep going</button>
-  <button class="secondary" onclick="react('Exactly my point.')">💙 You’re not wrong</button>
+  <button class="secondary" onclick="react(this,'Okay okay… maybe one more.')">🙄 Stop it</button>
+  <button class="secondary" onclick="react(this,'Gladly.')">😌 Keep going</button>
+  <button class="secondary" onclick="react(this,'Exactly my point.')">💙 You’re not wrong</button>
+  <p class="reaction hidden"></p>
 </div>
 
-<div class="card hidden q">
+<div class="card hidden pickup">
   <p><b>I don’t need perfect moments.<br>I just need you in them.</b></p>
-  <button class="secondary" onclick="react('Only saying the truth.')">🥹 That’s sweet</button>
-  <button class="secondary" onclick="react('Confidence suits you.')">😌 I know</button>
-  <button class="secondary" onclick="react('That’s the plan.')">💙 Always us</button>
+  <button class="secondary" onclick="react(this,'Only saying the truth.')">🥹 That’s sweet</button>
+  <button class="secondary" onclick="react(this,'Confidence suits you.')">😌 I know</button>
+  <button class="secondary" onclick="react(this,'That’s the plan.')">💙 Always us</button>
+  <p class="reaction hidden"></p>
 </div>
 
-<div class="card hidden q">
+<div class="card hidden pickup">
   <p><b>So… after all this flirting,<br>can I steal you for a lifetime? 😌</b></p>
-  <button class="secondary" onclick="react('I’ll wait.')">😳 Maybe</button>
-  <button class="secondary" onclick="react('On my way.')">💙 Come here</button>
-  <button class="secondary" onclick="react('Worth it.')">🙄 You’re dramatic</button>
+  <button class="secondary" onclick="react(this,'I’ll wait.')">😳 Maybe</button>
+  <button class="secondary" onclick="react(this,'On my way.')">💙 Come here</button>
+  <button class="secondary" onclick="react(this,'Worth it.')">🙄 You’re dramatic</button>
+  <p class="reaction hidden"></p>
 </div>
 
 <!-- AWW -->
-<div class="card hidden" id="aww">
+<div class="card hidden" id="pageFinalPrompt">
   <p>No lines.<br>No games.<br><b>Just me choosing you.</b></p>
-  <button class="primary" onclick="final()">Come here, Valentine 🤍</button>
+  <button class="primary" onclick="showFinal()">Come here, Valentine 🤍</button>
 </div>
 
 <!-- FINAL -->
-<div class="card hidden" id="final">
+<div class="card hidden" id="pageFinal">
   <h1>I’m choosing you 💙</h1>
   <p>Every version. Every day.</p>
   <img src="final-memory.jpg" alt="2018 to 2026">
 </div>
 
 <script>
-const cards=[p1,p2];
-const qs=[...document.querySelectorAll('.q')];
-let step=0, qIndex=0;
+let current = 0;
+const cards = document.querySelectorAll('.card');
+const pickups = document.querySelectorAll('.pickup');
 
-// emoji burst
-function burst(n=24){
-  for(let i=0;i<n;i++){
+function show(i){
+  cards.forEach(c=>c.classList.add('hidden'));
+  cards[i].classList.remove('hidden');
+}
+function goNext(){
+  burst();
+  current++;
+  show(current);
+}
+
+/* Emoji burst */
+function burst(count=24){
+  for(let i=0;i<count;i++){
     const e=document.createElement('div');
     e.className='emoji';
     e.innerHTML=['💙','💖','😘','💋','💞'][Math.floor(Math.random()*5)];
@@ -135,26 +195,29 @@ function burst(n=24){
     setTimeout(()=>e.remove(),4000);
   }
 }
-function show(el){
-  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
-  el.classList.remove('hidden');
-}
-function next(){
-  burst();
-  if(step===0){ show(p2); step=1; return; }
-  if(step===1){ show(qs[0]); qIndex=0; step=2; return; }
-  qIndex++;
-  if(qIndex<qs.length){ show(qs[qIndex]); }
-  else{ show(aww); }
-}
-function react(msg){
+
+/* Reactions */
+function react(btn,text){
   burst(18);
-  setTimeout(()=>next(),500);
+  const card = btn.closest('.card');
+  const reaction = card.querySelector('.reaction');
+  reaction.innerText = text;
+  reaction.classList.remove('hidden');
+
+  setTimeout(()=>{
+    reaction.classList.add('hidden');
+    if(current < cards.length-2){
+      current++;
+      show(current);
+    } else {
+      show(document.getElementById('pageFinalPrompt').dataset.index);
+    }
+  }, 1000);
 }
 
-// YES / NO behavior
-const yes=document.getElementById('yes');
-const no=document.getElementById('no');
+/* YES / NO logic */
+const yesBtn=document.getElementById('yesBtn');
+const noBtn=document.getElementById('noBtn');
 let noCount=0;
 const teaseLines=[
   "Nice try 😏",
@@ -162,30 +225,30 @@ const teaseLines=[
   "We both know this isn’t happening 😂"
 ];
 
-yes.onclick=()=>{ burst(30); show(p2); step=1; };
+yesBtn.onclick=()=>{ burst(30); show(1); current=1; };
 
-no.onmouseover=()=>{
-  no.style.animation='shake .28s';
+noBtn.onmouseover=()=>{
+  noBtn.style.animation='shake .28s';
   noCount++;
-  const scale=[1.2,1.5,1.7,2][Math.min(noCount-1,3)];
-  yes.style.transform=`scale(${scale})`;
+  yesBtn.style.transform=`scale(${Math.min(1+noCount*0.2,2)})`;
 
   const t=document.createElement('div');
   t.className='tease';
   t.innerText=teaseLines[(noCount-1)%teaseLines.length];
-  t.style.left=no.offsetLeft+'px';
-  t.style.top=(no.offsetTop-22)+'px';
+  t.style.left=noBtn.offsetLeft+'px';
+  t.style.top=(noBtn.offsetTop-22)+'px';
   document.body.appendChild(t);
-  setTimeout(()=>t.remove(),800);
+  setTimeout(()=>t.remove(),900);
 
-  no.style.position='absolute';
-  no.style.left=Math.random()*(window.innerWidth-140)+'px';
-  no.style.top=Math.random()*(window.innerHeight-80)+'px';
+  noBtn.style.position='absolute';
+  noBtn.style.left=Math.random()*(window.innerWidth-140)+'px';
+  noBtn.style.top=Math.random()*(window.innerHeight-80)+'px';
 };
 
-function final(){
+/* Final */
+function showFinal(){
   burst(40);
-  show(finalEl=document.getElementById('final'));
+  show(cards.length-1);
 }
 </script>
 
